@@ -1,19 +1,32 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const menu = [
+  {href: "/", text:"Beranda"},
+  {href: "/event", text:"Event"},
+  {href: "/tentang", text:"Tentang"},
+  {href: "/kontak", text:"Kontak"},
+]
 export default function Navbar() {
+  const pathname = usePathname();
   return (
-    <nav className="flex items-center justify-between border-b bg-white px-6 py-4 shadow-sm">
-      <Link href="/" className="text-xl font-bold text-blue-600">
-        Eventku
-      </Link>
-      <div className="flex items-center gap-6">
+    <nav className="flex items-center gap-6 bg-white px-6 py-3">
+      <span className="text-lg font-bold text-blue-600">EventKu</span>
+      {menu.map((m) => (
         <Link
-          href="/events"
-          className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+        key={m.href}
+        href={m.href}
+        className={
+          pathname === m.href
+          ? "font-semibold text-blue-600"
+          : "text-slate-600 hover:text-blue-600"
+        }
         >
-          Jelajah Event
+          {m.text}
         </Link>
-      </div>
+      ))}
     </nav>
   );
 }
