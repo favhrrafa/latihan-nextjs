@@ -18,7 +18,7 @@ export default function DaftarFavorit() {
         return r.json();
       })
       .then((d: Event[]) => setSemua(d))
-      .catch((e: Error) => setGalat(e.message))
+      .catch((e: Error) => setGalat(e.message))     
       .finally(() => setMemuat(false));
   }, []);
 
