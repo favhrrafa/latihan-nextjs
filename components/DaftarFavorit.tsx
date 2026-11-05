@@ -11,6 +11,7 @@ export default function DaftarFavorit() {
   const [galat, setGalat] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIds(JSON.parse(localStorage.getItem("favorit") ?? "[]"));
     fetch("/api/events")
       .then((r) => {
