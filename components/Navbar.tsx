@@ -8,6 +8,7 @@ const menu = [
   {href: "/event", text:"Event"},
   {href: "/tentang", text:"Tentang"},
   {href: "/favorit", text:"Favorit"},
+  {href: "/pesanan", text:"Pesanan"},
 ]
 export default function Navbar() {
   const pathname = usePathname();

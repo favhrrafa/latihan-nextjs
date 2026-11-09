@@ -22,8 +22,7 @@ export default function KatalogInteraktif({ events }: { events: Event[] }) {
     const cocokKategori = kategori === "Semua" || e.kategori === kategori;
     const sisaTiket = e.kuota - e.terisi;
     const cocokTiket = !hanyaAdaTiket || sisaTiket > 0;
-    const cocokHarga =
-      hargaMaksimal === "" || e.harga <= Number(hargaMaksimal);
+    const cocokHarga = hargaMaksimal === "" || e.harga <= Number(hargaMaksimal);
 
     return cocokCari && cocokKategori && cocokTiket && cocokHarga;
   });
@@ -36,18 +35,34 @@ export default function KatalogInteraktif({ events }: { events: Event[] }) {
   });
 
   const totalHarga = hasil.reduce((acc, e) => acc + e.harga, 0);
-  const totalSisaTiket = hasil.reduce((acc, e) => acc + (e.kuota - e.terisi), 0);
+  const totalSisaTiket = hasil.reduce(
+    (acc, e) => acc + (e.kuota - e.terisi),
+    0,
+  );
   const rataRataHarga = hasil.length > 0 ? totalHarga / hasil.length : 0;
 
-  // Batasi data yang tampil: 4 item jika tampilSemua = false, atau tampilkan semua jika true
   const eventDitampilkan = tampilSemua ? tersusun : tersusun.slice(0, 4);
 
-  // Fungsi pembantu agar saat filter diubah, tampilan kembali membatasi ke 4 kartu
-  const handleCari = (val: string) => { setCari(val); setTampilSemua(false); };
-  const handleKategori = (val: string) => { setKategori(val); setTampilSemua(false); };
-  const handleUrut = (val: string) => { setUrut(val); setTampilSemua(false); };
-  const handleHanyaAdaTiket = (val: boolean) => { setHanyaAdaTiket(val); setTampilSemua(false); };
-  const handleHargaMaksimal = (val: string) => { setHargaMaksimal(val); setTampilSemua(false); };
+  const handleCari = (val: string) => {
+    setCari(val);
+    setTampilSemua(false);
+  };
+  const handleKategori = (val: string) => {
+    setKategori(val);
+    setTampilSemua(false);
+  };
+  const handleUrut = (val: string) => {
+    setUrut(val);
+    setTampilSemua(false);
+  };
+  const handleHanyaAdaTiket = (val: boolean) => {
+    setHanyaAdaTiket(val);
+    setTampilSemua(false);
+  };
+  const handleHargaMaksimal = (val: string) => {
+    setHargaMaksimal(val);
+    setTampilSemua(false);
+  };
 
   return (
     <div>
@@ -68,7 +83,8 @@ export default function KatalogInteraktif({ events }: { events: Event[] }) {
       <div className="mb-4 text-sm text-slate-600">
         <p>{hasil.length} event ditemukan</p>
         <p>
-          Rata-rata harga {rupiah(rataRataHarga)} · Total sisa tiket {totalSisaTiket}
+          Rata-rata harga {rupiah(rataRataHarga)} · Total sisa tiket{" "}
+          {totalSisaTiket}
         </p>
       </div>
 
@@ -86,7 +102,7 @@ export default function KatalogInteraktif({ events }: { events: Event[] }) {
             <div className="mt-6 text-center">
               <button
                 onClick={() => setTampilSemua(true)}
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="rounded-lg border  bg-blue-500 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-blue-700"
               >
                 Tampilkan lagi
               </button>

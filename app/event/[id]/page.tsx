@@ -3,6 +3,7 @@ import Link from "next/link";
 import { events, rupiah } from "@/data/events";
 import FormPesan from "@/components/FormPesan";
 import TombolFavorit from "@/components/TombolFavorit";
+import { cookies } from "next/headers";
 
 export default async function Detail({ params }: PageProps<"/event/[id]">) {
   const { id } = await params;
@@ -10,6 +11,7 @@ export default async function Detail({ params }: PageProps<"/event/[id]">) {
   if (!event) notFound();
 
   const sisa = event.kuota - event.terisi;
+  const namaAwal = (await cookies()).get("nama")?.value ?? "";
   const eventTerkait = events.filter(
     (e) => e.kategori === event.kategori && e.id !== event.id,
   );
@@ -29,7 +31,7 @@ export default async function Detail({ params }: PageProps<"/event/[id]">) {
       </p>
 
       <TombolFavorit id={event.id} />
-      <FormPesan event={event} />
+      <FormPesan event={event} namaAwal={namaAwal} />
 
       <section className="mt-8 border-t pt-6">
         <h2 className="text-xl font-bold text-gray-800">Event Terkait</h2>
