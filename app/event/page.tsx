@@ -1,6 +1,9 @@
 
+import type { Metadata } from "next";
 import KatalogInteraktif from "@/components/KatalogInteraktif";
 import { ambilEvents } from "@/data/ambil";
+
+export const metadata: Metadata = { title: "Katalog Event" };
 
 
 export default async function Kataglog() {
